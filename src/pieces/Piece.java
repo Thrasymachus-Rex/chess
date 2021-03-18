@@ -2,14 +2,25 @@ package pieces;
 
 public abstract class Piece {
 
-    int x, y;
+    int row, col;
 
     boolean white;
 
-    public Piece(int x, int y, boolean white) {
-        this.x = x;
-        this.y = y;
+    public Piece(int row, int col, boolean white) {
+        this.row = row;
+        this.col = col;
         this.white = white;
     }
+
+    public boolean isWhite() {
+        return white;
+    }
+
+    public void setCoordinates(int row, int col){
+        this.row = row;
+        this.col = col;
+    }
+
+    public abstract boolean isMoveLegal(int endRow, int endCol);
 
 }

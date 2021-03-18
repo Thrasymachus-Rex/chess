@@ -2,8 +2,11 @@ package pieces;
 
 public class Bishop extends Piece {
 
-    public Bishop(int x, int y, boolean white) {
-        super(x, y, white);
+    public Bishop(int row, int col, boolean white) { super(row, col, white); }
+
+    @Override
+    public boolean isMoveLegal(int endRow, int endCol) {
+        return false;
     }
 
     @Override

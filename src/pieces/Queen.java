@@ -2,8 +2,11 @@ package pieces;
 
 public class Queen extends Piece {
 
-    public Queen(int x, int y, boolean white) {
-        super(x, y, white);
+    public Queen(int row, int col, boolean white) { super(row, col, white); }
+
+    @Override
+    public boolean isMoveLegal(int endRow, int endCol) {
+        return false;
     }
 
     @Override
