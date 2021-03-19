@@ -6,7 +6,11 @@ public class Queen extends Piece {
 
     @Override
     public boolean isMoveLegal(int endRow, int endCol) {
-        return false;
+        boolean straight = this.row == endRow || this.col == endCol;
+        int x = Math.abs(this.row - endRow);
+        int y = Math.abs(this.col - endCol);
+        boolean diagonal = (x == y);
+        return (diagonal || straight);
     }
 
     @Override

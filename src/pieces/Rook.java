@@ -6,7 +6,8 @@ public class Rook extends Piece {
 
     @Override
     public boolean isMoveLegal(int endRow, int endCol) {
-        return false;
+
+        return (this.row == endRow || this.col == endCol);
     }
 
     @Override

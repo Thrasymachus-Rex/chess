@@ -6,7 +6,9 @@ public class King extends Piece {
 
     @Override
     public boolean isMoveLegal(int endRow, int endCol) {
-        return false;
+        int x = Math.abs(this.row - endRow);
+        int y = Math.abs(this.col - endCol);
+        return (x<2 && y<2);
     }
 
     @Override
