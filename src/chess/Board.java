@@ -65,9 +65,29 @@ public class Board {
 
         if(!board[startRow][startCol].isMoveLegal(endRow, endCol, board)) return false; //check if move is valid for piece type
 
-        if(board[endRow][endCol]==null || board[endRow][endCol].isWhite()!=board[startRow][startCol].isWhite()) {
+        if(board[endRow][endCol]==null || board[endRow][endCol].isWhite()!=turn) {
             board[endRow][endCol] = board[startRow][startCol];
             board[startRow][startCol] = null;
+            if((endRow==7 || endRow == 0) && board[startRow][startCol] instanceof Pawn) {
+                if(input.length>2) {
+                    char promo = input[2].charAt(0);
+                    switch (promo) {
+                        case 'R':
+                            board[endRow][endCol] = new Rook(endRow, endCol, turn);
+                            break;
+                        case 'N':
+                            board[endRow][endCol] = new Knight(endRow, endCol, turn);
+                            break;
+                        case 'B':
+                            board[endRow][endCol] = new Bishop(endRow, endCol, turn);
+                            break;
+                        default:
+                            board[endRow][endCol] = new Queen(endRow, endCol, turn);
+                            break;
+                    }
+                }
+                else board[endRow][endCol] = new Queen(endRow, endCol, turn);
+            }
             board[endRow][endCol].setCoordinates(endRow, endCol);
             printBoard();
             return true;
