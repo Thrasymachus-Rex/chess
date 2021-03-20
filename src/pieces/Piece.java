@@ -21,6 +21,14 @@ public abstract class Piece {
         this.col = col;
     }
 
-    public abstract boolean isMoveLegal(int endRow, int endCol);
+    public int getRow() {
+        return row;
+    }
+
+    public int getCol() {
+        return col;
+    }
+
+    public abstract boolean isMoveLegal(int endRow, int endCol, Piece[][] board);
 
 }

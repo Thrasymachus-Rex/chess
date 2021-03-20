@@ -5,6 +5,8 @@ import pieces.*;
 public class Board {
 
     Piece[][] board;
+    King whiteKing;
+    King blackKing;
 
     public Board() {
 
@@ -33,6 +35,9 @@ public class Board {
             board[6][i] = new Pawn(6, i, true);
         }
 
+        whiteKing = (King) board[7][4];
+        blackKing = (King) board[0][4];
+
     }
 
     public void printBoard(){
@@ -48,22 +53,23 @@ public class Board {
         System.out.println(" a  b  c  d  e  f  g  h\n");
     }
 
-    public boolean movePiece(String input, boolean turn){
-        int startCol = input.charAt(0) - 'a';
-        int startRow = 7 - (input.charAt(1) - '1');
-        int endCol = input.charAt(3) - 'a';
-        int endRow = 7 - (input.charAt(4) - '1');
+    public boolean movePiece(String[] input, boolean turn){
+        int startCol = input[0].charAt(0) - 'a';
+        int startRow = 7 - (input[0].charAt(1) - '1');
+        int endCol = input[1].charAt(0) - 'a';
+        int endRow = 7 - (input[1].charAt(1) - '1');
 
         if(board[startRow][startCol]==null) return false; // no piece to move from start
         if(startRow==endRow && startCol==endCol) return false; // can't move to same location !!
         if(board[startRow][startCol].isWhite()!=turn) return false; // check if input is of opposite team
 
-        if(!board[startRow][startCol].isMoveLegal(endRow, endCol)) return false; //check if move is valid for piece type
+        if(!board[startRow][startCol].isMoveLegal(endRow, endCol, board)) return false; //check if move is valid for piece type
 
         if(board[endRow][endCol]==null || board[endRow][endCol].isWhite()!=board[startRow][startCol].isWhite()) {
             board[endRow][endCol] = board[startRow][startCol];
             board[startRow][startCol] = null;
             board[endRow][endCol].setCoordinates(endRow, endCol);
+            printBoard();
             return true;
         }
 

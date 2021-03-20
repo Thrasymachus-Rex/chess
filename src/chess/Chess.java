@@ -10,21 +10,22 @@ public class Chess {
         boolean turn = true;
 
         Scanner scanner = new Scanner(System.in);
-        String input;
+        String[] input;
+
+        board.printBoard();
 
         while(true){ // run permanently until stopped for testing purposes
-            board.printBoard();
-            if(turn) System.out.print("White's Move: ");
-            else System.out.print("Black's Move: ");
-            input = scanner.nextLine();
-            while(!board.movePiece(input, turn)){
-                System.out.println("Illegal Move, try again");
-                if(turn) System.out.print("White's Move: ");
-                else System.out.print("Black's Move: ");
-                input = scanner.nextLine();
-            }
-            turn = !turn;
+            if(turn) System.out.print("White's move: ");
+            else System.out.print("Black's move: ");
+            input = scanner.nextLine().split(" ");
+            if(input[0].equals("resign") || (input.length>2 && input[2].equals("draw?"))) break;
+            if (!board.movePiece(input, turn)) System.out.println("Illegal move, try again");
+            else turn = !turn;
         }
+
+        if(input.length>2 && input[2].equals("draw?")) System.out.println("draw");
+        else if(turn) System.out.println("Black wins");
+        else System.out.println("White wins");
 
     }
 
