@@ -51,6 +51,7 @@ public class Board {
             System.out.println(8-r);
         }
         System.out.println(" a  b  c  d  e  f  g  h\n");
+
     }
 
     public boolean movePiece(String[] input, boolean turn){
@@ -68,7 +69,7 @@ public class Board {
         if(board[endRow][endCol]==null || board[endRow][endCol].isWhite()!=turn) {
             board[endRow][endCol] = board[startRow][startCol];
             board[startRow][startCol] = null;
-            if((endRow==7 || endRow == 0) && board[startRow][startCol] instanceof Pawn) {
+            if((endRow==7 || endRow == 0) && board[endRow][endCol] instanceof Pawn) {
                 if(input.length>2) {
                     char promo = input[2].charAt(0);
                     switch (promo) {
@@ -89,10 +90,53 @@ public class Board {
                 else board[endRow][endCol] = new Queen(endRow, endCol, turn);
             }
             board[endRow][endCol].setCoordinates(endRow, endCol);
+            if(isCheck(turn)) {
+                board[startRow][startCol] = board[endRow][endCol];
+                board[startRow][startCol] = null;
+                board[endRow][endCol].setCoordinates(endRow, endCol);
+                return false;
+            }
+            printBoard();
+            if(isCheck(!turn)) System.out.println("Check");
+            return true;
+        }
+
+        else if(!isCheck(turn) && board[startRow][startCol] instanceof King && board[endRow][endCol] instanceof Rook && board[endRow][endCol].isWhite()==turn){
+            for(int c = Math.min(startCol,endCol)+1; c < Math.max(startCol,endCol); c++){
+                board[endRow][c] = board[startRow][startCol];
+                board[endRow][c].setCoordinates(endRow, c);
+                board[startRow][startCol] = null;
+                if(isCheck(turn)) {
+                    board[startRow][startCol] = board[endRow][c];
+                    board[startRow][startCol].setCoordinates(startRow, startCol);
+                    board[endRow][c] = null;
+                    return false;
+                }
+                board[startRow][startCol] = board[endRow][c];
+                board[startRow][startCol].setCoordinates(startRow, startCol);
+                board[endRow][c] = null;
+            }
+            Rook temp = (Rook) board[endRow][endCol];
+            temp.setMoved(true);
+            ((King) board[startRow][startCol]).setMoved(true);
+            board[endRow][endCol] = board[startRow][startCol];
+            board[startRow][startCol] = temp;
+            board[endRow][endCol].setCoordinates(endRow, endCol);
+            board[startRow][startCol].setCoordinates(startRow, startCol);
             printBoard();
             return true;
         }
 
+        return false;
+    }
+
+    public boolean isCheck(boolean white) {
+        for (int r = 0; r < 8; r++) {
+            for (int c = 0; c < 8; c++) {
+                if(board[r][c]!=null && board[r][c].isWhite()!=white && (white ? board[r][c].isMoveLegal(whiteKing.getRow(),whiteKing.getCol(),board) : board[r][c].isMoveLegal(blackKing.getRow(),blackKing.getCol(),board)))
+                    return true;
+            }
+        }
         return false;
     }
 

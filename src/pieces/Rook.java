@@ -2,6 +2,8 @@ package pieces;
 
 public class Rook extends Piece {
 
+    boolean hasMoved = false;
+
     public Rook(int row, int col, boolean white) { super(row, col, white); }
 
     @Override
@@ -20,8 +22,16 @@ public class Rook extends Piece {
                 if(board[r][this.col]!=null) return false;
             }
         }
-
+        hasMoved = true;
         return true;
+    }
+
+    public boolean hasMoved() {
+        return this.hasMoved;
+    }
+
+    public void setMoved(boolean hasMoved) {
+        this.hasMoved = hasMoved;
     }
 
     @Override
