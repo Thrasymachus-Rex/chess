@@ -6,8 +6,8 @@ public class Knight extends Piece {
 
     @Override
     public boolean isMoveLegal(int endRow, int endCol, Piece[][] board) {
-        int x = Math.abs(this.row - endRow);
-        int y = Math.abs(this.col - endCol);
+        int y = Math.abs(this.row - endRow);
+        int x = Math.abs(this.col - endCol);
         return x * y == 2;
     }
 

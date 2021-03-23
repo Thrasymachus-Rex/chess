@@ -8,23 +8,21 @@ public class King extends Piece {
 
     @Override
     public boolean isMoveLegal(int endRow, int endCol, Piece[][] board) {
-        int x = Math.abs(this.row - endRow);
-        int y = Math.abs(this.col - endCol);
+        int y = Math.abs(this.row - endRow);
+        int x = Math.abs(this.col - endCol);
 
-        if(board[endRow][endCol] instanceof Rook && !this.hasMoved && !((Rook)board[endRow][endCol]).hasMoved()){
-            for(int c = Math.min(this.col,endCol)+1; c < Math.max(this.col,endCol); c++){
-                if(board[endRow][c]!=null) return false;
+        if (x == 2 && endCol == 6) endCol = 7;
+        if (x == 2 && endCol == 2) endCol = 0;
+
+        if (x == 2 && board[endRow][endCol] instanceof Rook && !this.hasMoved && !((Rook) board[endRow][endCol]).hasMoved()) {
+            for (int c = Math.min(this.col, endCol) + 1; c < Math.max(this.col, endCol); c++) {
+                if (board[endRow][c] != null) return false;
             }
             return true;
         }
 
 
-        if (x<2 && y<2) {
-            hasMoved = true;
-            return true;
-        }
-
-        return false;
+        return x < 2 && y < 2;
     }
 
     public void setMoved(boolean hasMoved) {

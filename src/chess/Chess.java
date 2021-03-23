@@ -14,13 +14,20 @@ public class Chess {
 
         board.printBoard();
 
-        while(true){ // run permanently until stopped for testing purposes
-            if(turn) System.out.print("White's move: ");
+        while (true) {
+            if (turn) System.out.print("White's move: ");
             else System.out.print("Black's move: ");
             input = scanner.nextLine().split(" ");
-            if(input[0].equals("resign") || (input.length>2 && input[2].equals("draw?"))) break;
+            if (input[0].equals("resign") || (input.length > 2 && input[2].equals("draw?"))) break;
             if (!board.movePiece(input, turn)) System.out.println("Illegal move, try again");
-            else turn = !turn;
+            else {
+                turn = !turn;
+                if (board.isCheckMate(turn)) {
+                    System.out.println("Checkmate");
+                    break;
+                }
+                if (board.isCheck(turn)) System.out.println("Check");
+            }
         }
 
         if(input.length>2 && input[2].equals("draw?")) System.out.println("draw");

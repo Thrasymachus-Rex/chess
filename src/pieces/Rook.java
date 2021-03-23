@@ -22,7 +22,6 @@ public class Rook extends Piece {
                 if(board[r][this.col]!=null) return false;
             }
         }
-        hasMoved = true;
         return true;
     }
 
