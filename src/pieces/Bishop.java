@@ -1,5 +1,11 @@
 package pieces;
 
+/**
+ * The Bishop class extends the Piece class
+ *
+ * @author Sreekar Vedula
+ * @author Quan Li
+ */
 public class Bishop extends Piece {
 
     public Bishop(int row, int col, boolean white) {

@@ -1,5 +1,11 @@
 package pieces;
 
+/**
+ * The Rook class extends the Piece class
+ *
+ * @author Sreekar Vedula
+ * @author Quan Li
+ */
 public class Rook extends Piece {
 
     boolean hasMoved = false;
@@ -25,10 +31,20 @@ public class Rook extends Piece {
         return true;
     }
 
+    /**
+     * Getter for field that checks if rook has moved from default position
+     *
+     * @return True if rook has already moved
+     */
     public boolean hasMoved() {
         return this.hasMoved;
     }
 
+    /**
+     * Setter for field that checks if rook has moved from default position
+     *
+     * @param hasMoved False if rook has moved from the initial position
+     */
     public void setMoved(boolean hasMoved) {
         this.hasMoved = hasMoved;
     }

@@ -2,6 +2,12 @@ package chess;
 
 import pieces.*;
 
+/**
+ * The Board class is the heart of the game and contains all the necessary logic for gameplay
+ *
+ * @author Sreekar Vedula
+ * @author Quan Li
+ */
 public class Board {
 
     Piece[][] board;
@@ -10,6 +16,9 @@ public class Board {
     Piece checkPiece;
     Piece enPassant;
 
+    /**
+     * Initializes the game board by creating an 8x8 array to hold all the pieces and setting them to their respective locations
+     */
     public Board() {
 
         board = new Piece[8][8];
@@ -42,6 +51,9 @@ public class Board {
 
     }
 
+    /**
+     * Prints out the chess board by traversing a 2D array
+     */
     public void printBoard() {
         System.out.println();
         for (int r = 0; r < 8; r++) {
@@ -56,6 +68,13 @@ public class Board {
 
     }
 
+    /**
+     * Moves a piece on the chess board by updating its array if it is valid.
+     *
+     * @param input An array of strings that contains the starting and ending points for each move.
+     * @param turn  Indicates the color of the team that is currently making a move. True stands for white and False stands for black.
+     * @return Returns True if the move is valid and was successfully made. False indicates an illegal move and prompts the user to try again.
+     */
     public boolean movePiece(String[] input, boolean turn) {
         int startRow, startCol, endRow, endCol;
         if (input.length == 4) {
@@ -70,12 +89,12 @@ public class Board {
             endRow = 7 - (input[1].charAt(1) - '1');
         }
 
-        if (board[startRow][startCol] == null) return false; // no piece to move from start
-        if (startRow == endRow && startCol == endCol) return false; // can't move to same location !!
-        if (board[startRow][startCol].isWhite() != turn) return false; // check if input is of opposite team
+        if (board[startRow][startCol] == null) return false;
+        if (startRow == endRow && startCol == endCol) return false;
+        if (board[startRow][startCol].isWhite() != turn) return false;
 
         if (!board[startRow][startCol].isMoveLegal(endRow, endCol, board))
-            return false; //check if move is valid for piece type
+            return false;
 
         if (board[endRow][endCol] == null && enPassant == null && board[startRow][startCol] instanceof Pawn && startCol != endCol)
             return false;
@@ -175,6 +194,12 @@ public class Board {
         return false;
     }
 
+    /**
+     * Checks whether the king of the specified team is in check
+     *
+     * @param white The color of the king, where true stands for white and false stands for black
+     * @return True if the king is in check and false otherwise
+     */
     public boolean isCheck(boolean white) {
         for (int r = 0; r < 8; r++) {
             for (int c = 0; c < 8; c++) {
@@ -187,6 +212,12 @@ public class Board {
         return false;
     }
 
+    /**
+     * Checks if the specified king has been checkmated, leading to the end of the game
+     *
+     * @param white The color of the king, where true stands for white and false stands for black
+     * @return True if the king has been checkmated
+     */
     public boolean isCheckMate(boolean white) {
         if (!isCheck(white)) return false;
 

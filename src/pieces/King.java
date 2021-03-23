@@ -1,5 +1,11 @@
 package pieces;
 
+/**
+ * The King class extends the Piece class
+ *
+ * @author Sreekar Vedula
+ * @author Quan Li
+ */
 public class King extends Piece {
 
     boolean hasMoved = false;
@@ -27,6 +33,11 @@ public class King extends Piece {
         return x < 2 && y < 2;
     }
 
+    /**
+     * Setter for field that checks if king has moved from default position
+     *
+     * @param hasMoved False if king has moved from the initial position
+     */
     public void setMoved(boolean hasMoved) {
         this.hasMoved = hasMoved;
     }

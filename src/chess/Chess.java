@@ -2,8 +2,18 @@ package chess;
 
 import java.util.Scanner;
 
+/**
+ * The Chess class contains the main method that runs the program
+ *
+ * @author Sreekar Vedula
+ * @author Quan Li
+ */
 public class Chess {
-
+    /**
+     * Runs the game and accepts moves until a checkmate or draw/resign is detected
+     *
+     * @param args
+     */
     public static void main(String[] args) {
 
         Board board = new Board();
