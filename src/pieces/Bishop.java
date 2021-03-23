@@ -2,13 +2,15 @@ package pieces;
 
 public class Bishop extends Piece {
 
-    public Bishop(int row, int col, boolean white) { super(row, col, white); }
+    public Bishop(int row, int col, boolean white) {
+        super(row, col, white);
+    }
 
     @Override
     public boolean isMoveLegal(int endRow, int endCol, Piece[][] board) {
         int x = Math.abs(this.row - endRow);
         int y = Math.abs(this.col - endCol);
-        if(x!=y) return false;
+        if (x != y) return false;
 
         int r = this.row, c = this.col;
 
@@ -17,7 +19,7 @@ public class Bishop extends Piece {
             else r--;
             if (endCol - c > 0) c++;
             else c--;
-            if (r==endRow && c==endCol) break;
+            if (r == endRow && c == endCol) break;
             if (board[r][c] != null) return false;
         }
 
@@ -26,7 +28,7 @@ public class Bishop extends Piece {
 
     @Override
     public String toString() {
-        if(white) return "wB";
+        if (white) return "wB";
         else return "bB";
     }
 }

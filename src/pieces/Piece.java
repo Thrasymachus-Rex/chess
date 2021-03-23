@@ -16,7 +16,7 @@ public abstract class Piece {
         return white;
     }
 
-    public void setCoordinates(int row, int col){
+    public void setCoordinates(int row, int col) {
         this.row = row;
         this.col = col;
     }

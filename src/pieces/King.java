@@ -4,7 +4,9 @@ public class King extends Piece {
 
     boolean hasMoved = false;
 
-    public King(int row, int col, boolean white) { super(row, col, white); }
+    public King(int row, int col, boolean white) {
+        super(row, col, white);
+    }
 
     @Override
     public boolean isMoveLegal(int endRow, int endCol, Piece[][] board) {
@@ -31,7 +33,7 @@ public class King extends Piece {
 
     @Override
     public String toString() {
-        if(white) return "wK";
+        if (white) return "wK";
         else return "bK";
     }
 }

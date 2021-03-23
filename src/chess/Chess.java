@@ -30,8 +30,8 @@ public class Chess {
             }
         }
 
-        if(input.length>2 && input[2].equals("draw?")) System.out.println("draw");
-        else if(turn) System.out.println("Black wins");
+        if (input.length > 2 && input[2].equals("draw?")) System.out.println("draw");
+        else if (turn) System.out.println("Black wins");
         else System.out.println("White wins");
 
     }

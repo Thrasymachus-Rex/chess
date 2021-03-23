@@ -82,7 +82,7 @@ public class Board {
         if (board[startRow][startCol] instanceof Pawn && board[endRow][endCol] == null && enPassant != null && Math.abs(endRow - startRow) == 1 && Math.abs(endCol - startCol) == 1 && (enPassant.getRow() != startRow || enPassant.isWhite() == board[startRow][startCol].isWhite() || enPassant.getCol() != endCol))
             return false;
 
-        if (!isCheck(turn) && board[startRow][startCol] instanceof King && Math.abs(endCol - startCol) > 1 && input.length != 4) {
+        if (!isCheck(turn) && board[startRow][startCol] instanceof King && startRow == endRow && Math.abs(endCol - startCol) > 1 && input.length != 4) {
             if (endCol == 6) endCol = 7;
             if (endCol == 2) endCol = 0;
             for (int c = Math.min(startCol, endCol) + 1; c < Math.max(startCol, endCol); c++) {

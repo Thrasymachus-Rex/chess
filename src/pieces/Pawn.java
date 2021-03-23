@@ -3,9 +3,10 @@ package pieces;
 public class Pawn extends Piece {
 
     boolean firstMove = true;
-    boolean enpassant = false;
 
-    public Pawn(int row, int col, boolean white) { super(row, col, white); }
+    public Pawn(int row, int col, boolean white) {
+        super(row, col, white);
+    }
 
     @Override
     public boolean isMoveLegal(int endRow, int endCol, Piece[][] board) {
