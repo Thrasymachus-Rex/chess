@@ -40,7 +40,21 @@ public class Chess {
             }
         }
 
-        if (input.length > 2 && input[2].equals("draw?")) System.out.println("draw");
+        if (input.length > 2 && input[2].equals("draw?")){
+            System.out.println("'draw' to accept");
+            turn = !turn;
+            if(turn) System.out.print("White's move: ");
+            else System.out.print("Black's move: ");
+            input = scanner.nextLine().split(" ");
+            while(!input[0].equals("draw")) {
+                System.out.println("Illegal move");
+                if(turn) System.out.print("White's move: ");
+                else System.out.print("Black's move: ");
+                input = scanner.nextLine().split(" ");
+            }
+            System.out.println("Draw");
+
+        }
         else if (turn) System.out.println("Black wins");
         else System.out.println("White wins");
 
