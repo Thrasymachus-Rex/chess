@@ -227,9 +227,8 @@ public class Board {
             for (int c = 0; c < 8; c++) {
                 if (movePiece(new String[]{String.valueOf(king.getRow()), String.valueOf(king.getCol()), String.valueOf(r), String.valueOf(c)}, white))
                     return false;
-                if (board[r][c] != null && board[r][c].isWhite() == white && board[r][c].isMoveLegal(checkPiece.getRow(), checkPiece.getCol(), board))
+                if (board[r][c] != null && board[r][c].isWhite() == white && movePiece(new String[]{String.valueOf(r), String.valueOf(c), String.valueOf(checkPiece.getRow()), String.valueOf(checkPiece.getCol())}, white))
                     return false;
-
                 for (int r2 = 0; r2 < 8; r2++) {
                     for (int c2 = 0; c2 < 8; c2++) {
                         if (board[r][c] != null && board[r][c].isWhite() == white && movePiece(new String[]{String.valueOf(r), String.valueOf(c), String.valueOf(r2), String.valueOf(c2)}, white))
